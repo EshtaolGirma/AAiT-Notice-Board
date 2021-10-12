@@ -22,7 +22,7 @@ app.use("/api/Course", CourseRouter);
 // app.use("/api/User", UserRouter);
 
 
-const DB_URI = 'mongodb://localhost:27017/manjuDB'
+const DB_URI = 'mongodb+srv://aait-notice-board:aait-notice-board@aait-notice-board.qq1go.mongodb.net/manjuDB?retryWrites=true&w=majority'
 
 mongoose.connect(DB_URI).then(() => {
     app.listen(3000, () => console.log('Server running...'));
