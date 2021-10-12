@@ -18,7 +18,7 @@ app.use("/api/Course", CourseRouter);
 // app.use("/api/CourseMaterial", CourseMatRouter);
 // app.use("/api/Department", DepartRouter);
 // app.use("/api/Discussion", DiscussionRouter);
-// app.use("/api/NewsFeed", NewsFeedRouter);
+app.use("/api/NewsFeed", NewsFeedRouter);
 // app.use("/api/User", UserRouter);
 
 
