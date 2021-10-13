@@ -2,8 +2,12 @@ const express = require('express');
 const mongoose = require('mongoose');
 
 const app = express();
+const log = console.log
+const port = process.env.PORT || 3000 // for hosting purposes
 
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({
+    extended: true
+}));
 app.use(express.json());
 
 
@@ -24,11 +28,19 @@ app.use("/api/NewsFeed", NewsFeedRouter);
 
 const DB_URI = 'mongodb+srv://aait-notice-board:aait-notice-board@aait-notice-board.qq1go.mongodb.net/manjuDB?retryWrites=true&w=majority'
 
-mongoose.connect(DB_URI).then(() => {
-    app.listen(3000, () => console.log('Server running...'));
-})
-    .catch((err) => console.log('Error occurred while connecting', err));
+mongoose.connect(DB_URI, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+    }, ).then(() => {
+        app.listen(port, () => log('Server running on port ' + port));
+    })
+    .catch((err) => log('Database connection failed.', err));
 
+
+app.get("/", function (req, res) {
+    res.send({
+        'status': 200,
+    })
+});
 
 module.exports.app = app
-
