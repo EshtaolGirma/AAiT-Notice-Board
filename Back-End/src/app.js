@@ -9,14 +9,14 @@ app.use(express.json());
 
 CourseMatRouter = require('./routes/CourseMatRoute');
 CourseRouter = require('./routes/CourseRoute');
-DepartRouter = require('./routes/DepartRoute')
-DiscussionRouter = require('./routes/DiscussionRoute')
-NewsFeedRouter = require('./routes/NewsFeedRoute')
+DepartRouter = require('./routes/DepartRoute');
+DiscussionRouter = require('./routes/DiscussionRoute');
+NewsFeedRouter = require('./routes/NewsFeedRoute');
 UserRouter = require('./routes/UserRoute');
 
 app.use("/api/Course", CourseRouter);
 // app.use("/api/CourseMaterial", CourseMatRouter);
-// app.use("/api/Department", DepartRouter);
+app.use("/api/Department", DepartRouter);
 // app.use("/api/Discussion", DiscussionRouter);
 // app.use("/api/NewsFeed", NewsFeedRouter);
 // app.use("/api/User", UserRouter);
