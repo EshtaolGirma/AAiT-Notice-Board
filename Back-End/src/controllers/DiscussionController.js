@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const discussionModel = require('../Models/DiscussionModel.js')
 const log = console.log
 
-function postSomething(req, res){
+function postSomething(req, res) {
     const toBePosted = new discussionModel({
         _id: new mongoose.Types.ObjectId(),
         userID: req.body.userID,
@@ -24,3 +24,29 @@ function postSomething(req, res){
             });
         });
 }
+
+function getPosts(req, res) {
+    discussionModel.find()
+        .exec()
+        .then(result => {
+            if (result) {
+                res.status(200).json(result);
+                log("getting posts")
+            } else {
+                res.status(404).json({
+                    message: "nothing found",
+                })
+            }
+
+        })
+        .catch(err => {
+            res.status(500).json({
+                error: 'Internal Server Error',
+            });
+        });
+}
+
+module.exports = {
+    getPosts,
+    postSomething,
+};

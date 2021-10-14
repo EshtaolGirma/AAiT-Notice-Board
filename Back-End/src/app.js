@@ -21,7 +21,7 @@ UserRouter = require('./routes/UserRoute');
 app.use("/api/Course", CourseRouter);
 // app.use("/api/CourseMaterial", CourseMatRouter);
 app.use("/api/Department", DepartRouter);
-// app.use("/api/Discussion", DiscussionRouter);
+app.use("/api/Discussion", DiscussionRouter);
 app.use("/api/NewsFeed", NewsFeedRouter);
 // app.use("/api/User", UserRouter);
 
@@ -34,13 +34,13 @@ mongoose.connect(DB_URI, {
     }, ).then(() => {
         app.listen(port, () => log('Server running on port ' + port));
     })
-    .catch((err) => log('Database connection failed.', err));
+    .catch((err) => log('Database connection failed. \n', err));
 
 
-app.get("/", function (req, res) {
-    res.send({
-        'status': 200,
-    })
-});
+// app.get("/", function (req, res) {
+//     res.send({
+//         'status': 200,
+//     })
+// });
 
 module.exports.app = app
