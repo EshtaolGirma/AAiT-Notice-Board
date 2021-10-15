@@ -12,7 +12,7 @@ module.exports = {
       .then((result) => {
         console.log(result);
         res.status(200).json({
-          message: "Fetched succefully",
+          message: "Fetched successfully",
           data: result,
         });
       })
@@ -61,7 +61,7 @@ module.exports = {
           console.log(result);
           res.status(200).json({
             message: "Data has been successfully deleted",
-            Deletedata: result,
+            DeletedData: result,
           });
         } else {
           res.status(404).json({

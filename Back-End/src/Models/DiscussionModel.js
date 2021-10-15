@@ -1,40 +1,26 @@
-const mongoose = require('mongoose');
+// "Discussion": {
+//     "id": "Integer, PK",
+//     "userID": "Integer //foreign key",
+//     "Course": "Integer //foreign key"
+// }
 
-const DiscussionSchema = mongoose.Schema(
-    {
-        _id: mongoose.Schema.Types.ObjectId,
-        username:{
-           type: String,
-           required: true
+const mongoose = require('mongoose')
 
-        },
-        couresId:{
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Course",
-            required: true,
-        },
-        topic:{
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Discussion",
-            required: false,
-        },
-        level:{
-            type: Integer,
-            required: true,
+const discussionSchema = mongoose.Schema({
+    _id: mongoose.Schema.Types.ObjectId,
+    userID: {
+        type: Number,
+        ref: "User",
+        required: true,
+    },
+    courseID: {
+        type: Number,
+        ref: "Course",
+        required: true,
+    },
+});
 
-        },
-        replyArray:[
-            {
-                type:String,
-                required: false,
-            }
-        ],
-        comment:{
-            type: String,
-            required: true,
-        }
 
-    }
-)
 
-module.exports = mongoose.model('Discussion',DiscussionSchema);
+
+module.exports = mongoose.model('discussion', discussionSchema);

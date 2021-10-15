@@ -1,28 +1,24 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
-const NewsFeedSchema = mongoose.Schema(
-    {
-        _id: mongoose.Schema.Types.ObjectId,
-        title:{
-            type: String,
-            required: true,
+const NewsFeedSchema = mongoose.Schema({
+  _id: mongoose.Schema.Types.ObjectId,
+  title: {
+    type: String,
+    required: true,
+  },
+  description: {
+    type: String,
+    required: true,
+  },
+  deptId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Department",
+    required: true,
+  },
+  postDate: {
+    type: Date,
+    required: true,
+  },
+});
 
-        },
-        description:{
-            type: String,
-            required: true,
-        },
-        deptId:{
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Deparment',
-            required: true,
-        },
-        postDate:{
-            type: Date,
-            required: true
-        }
-
-    }
-)
-
-module.exports = mongoose.model('NewsFeed', NewsFeedSchema);
+module.exports = mongoose.model("NewsFeed", NewsFeedSchema);
