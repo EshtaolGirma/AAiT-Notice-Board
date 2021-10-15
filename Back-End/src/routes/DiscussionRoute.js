@@ -4,6 +4,7 @@ var router = express.Router()
 const discussion = require("../controllers/DiscussionController");
 
 router.get("/", discussion.getPosts)
-router.post("/", discussion.postSomething)
+router.post("/", discussion.postQuestion)
+router.post("/", discussion.replyToPost)
 
 module.exports = router

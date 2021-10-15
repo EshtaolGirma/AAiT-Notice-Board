@@ -1,8 +1,12 @@
 // "Discussion": {
 //     "id": "Integer, PK",
 //     "userID": "Integer //foreign key",
-//     "Course": "Integer //foreign key"
-// }
+//     "Course": "Integer //foreign key",
+//     "topic":"null",
+//     "level":"0 ",
+//     "listofreply":"array ", // list of discussion ids that are replyies to this
+//     "Disc":"String the acutal question or comment"
+//   },
 
 const mongoose = require('mongoose')
 
@@ -18,9 +22,20 @@ const discussionSchema = mongoose.Schema({
         ref: "Course",
         required: true,
     },
+    topic: {
+        type: String,
+        required: true,
+    },
+    level: {
+        type: Number,
+        required: true,
+    },
+    listOfReplies: Array,
+    value: {
+        type: String,
+        required: true,
+    },
 });
-
-
 
 
 module.exports = mongoose.model('discussion', discussionSchema);

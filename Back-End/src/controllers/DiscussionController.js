@@ -2,25 +2,57 @@ const mongoose = require('mongoose')
 const discussionModel = require('../Models/DiscussionModel.js')
 const log = console.log
 
-function postSomething(req, res) {
-    const toBePosted = new discussionModel({
-        _id: new mongoose.Types.ObjectId(),
-        userID: req.body.userID,
-        courseID: req.body.courseID,
-    });
+let question = new discussionModel({
+    _id: new mongoose.Types.ObjectId(),
+    userID: req.body.userID,
+    courseID: req.body.courseID,
+    level: 0,
+    value: req.body.question,
+});
 
-    toBePosted
+function postQuestion(req, res) {
+    question
         .save()
         .then(result => {
 
             res.status(201).json({
-                message: "comment posted",
+                message: "Question posted",
+                value: result,
             });
-            log("Comment posted")
+            log("Question posted")
         })
         .catch(err => {
             res.status(500).json({
-                error: 'Internal Server Error'
+                error: 'Internal Server Error',
+                value: err,
+            });
+        });
+}
+
+function replyToPost(req, res) {
+    question = new discussionModel({
+        _id: new mongoose.Types.ObjectId(),
+        userID: req.body.userID,
+        courseID: req.body.courseID,
+        level: 0,
+        listOfReplies: [req.body.reply, ],
+        value: req.body.question,
+    });
+
+    question
+        .save()
+        .then(result => {
+
+            res.status(201).json({
+                message: "Reply posted",
+                value: result
+            });
+            log("Reply posted")
+        })
+        .catch(err => {
+            res.status(500).json({
+                error: 'Internal Server Error',
+                value: err,
             });
         });
 }
@@ -42,11 +74,13 @@ function getPosts(req, res) {
         .catch(err => {
             res.status(500).json({
                 error: 'Internal Server Error',
+                value: err,
             });
         });
 }
 
 module.exports = {
     getPosts,
-    postSomething,
-};
+    postQuestion,
+    replyToPost
+}
