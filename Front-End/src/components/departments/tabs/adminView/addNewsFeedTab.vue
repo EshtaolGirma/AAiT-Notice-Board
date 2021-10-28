@@ -1,0 +1,92 @@
+<template>
+  <div>
+  <h3 class="tab-title" style="margin-left: 50px; color: #121c41">
+    Post New News Feed
+  </h3>
+  <hr />
+
+  <div class="card form-container">
+    <div class="card-body">
+      <h5 class="card-title">News feed</h5>
+    </div>
+    <form>
+      <div class="title field">
+        <label for="username">Title</label>
+        <input type="text" class="form-control" placeholder="Title" />
+      </div>
+      <div class="message field">
+        <label for="email">Message body</label>
+        <textarea
+          class="form-control question-textarea"
+          rows="5"
+          placeholder="Message"
+        ></textarea>
+      </div>
+
+      <button type="button" class="btn btn-success btn-detail-submit">
+        Post
+      </button>
+    </form>
+  </div>
+  </div>
+</template>
+
+<style scoped>
+a {
+  text-decoration: none;
+}
+.card {
+  margin: 50px;
+  margin-bottom: 25px;
+  margin-top: 25px;
+}
+
+.tab-title {
+  padding-top: 30px;
+  text-align: start;
+}
+
+.form-container {
+  border: none;
+  box-shadow: 0 1px 20px 0 rgb(69 90 100 / 8%);
+}
+
+.btn-success {
+  background: #2e4081;
+  border-radius: 15px;
+  border: none;
+  height: 50px;
+  width: 150px;
+  margin: 30px 0 30px 0;
+  color: #fff;
+  font-weight: 700;
+  font-size: 16px;
+}
+.btn-success:hover {
+  background: #121c41;
+}
+
+.field {
+  padding-bottom: 30px;
+  padding-right: 30px;
+  padding-left: 30px;
+}
+
+textarea,
+input {
+  resize: none;
+  border-radius: 10px;
+  /* border: 1px dashed red; */
+}
+
+label {
+  padding-bottom: 10px;
+  padding-left: 8px;
+}
+
+.btn-detail-submit {
+  margin-left: 30px;
+  margin-bottom: 50px;
+  padding-inline: 20px;
+}
+</style>

@@ -2,13 +2,13 @@ const mongoose = require('mongoose')
 const discussionModel = require('../Models/DiscussionModel.js')
 const log = console.log
 
-let question = new discussionModel({
-    _id: new mongoose.Types.ObjectId(),
-    userID: req.body.userID,
-    courseID: req.body.courseID,
-    level: 0,
-    value: req.body.question,
-});
+// let question = new discussionModel({
+//     _id: new mongoose.Types.ObjectId(),
+//     userID: req.body.userID,
+//     courseID: req.body.courseID,
+//     level: 0,
+//     value: req.body.question,
+// });
 
 function postQuestion(req, res) {
     question

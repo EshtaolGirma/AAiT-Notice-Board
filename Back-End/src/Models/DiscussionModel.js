@@ -35,6 +35,15 @@ const discussionSchema = mongoose.Schema({
         type: String,
         required: true,
     },
+    replies:[
+        {
+            _id: mongoose.Schema.Types.ObjectId,
+            text:{
+                type: String,
+                required: true,
+            }
+        }
+    ]
 });
 
 
