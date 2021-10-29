@@ -9,7 +9,8 @@
         </router-link>
       </div>
 
-      <ul class="list-unstyled components">
+      <ul class="list-unstyled components" >
+        
         <li>
           <router-link to="/"><i class="fas fa-home"></i>Home</router-link>
         </li>
@@ -27,8 +28,11 @@
             class="dropdown-toggle"
             ><i class="fas fa-book"></i>Departments</a
           >
-          <ul class="collapse list-unstyled" id="pageSubmenu">
+          <ul class="collapse list-unstyled" id="pageSubmenu" v-for="dept in departs" :key="dept._id">
             <li>
+              <router-link :to="{name:'Departments', params:{id: dept._id}, query:{id: dept._id}}"><i class="fas fa-book"></i>{{dept.name}}</router-link>
+            </li>
+            <!-- <li>
               <router-link to="/"><i class="fas fa-book"></i>Pre</router-link>
             </li>
             <li>
@@ -60,7 +64,7 @@
               <router-link to="/"
                 ><i class="fas fa-laptop-code"></i>SITE</router-link
               >
-            </li>
+            </li> -->
           </ul>
         </li>
         <li></li>
@@ -135,9 +139,17 @@
 <script>
 export default {
   name: "Sidebar",
-  props: {
-    msg: String,
+  data(){
+    return{
+      departs: []
+    }
   },
+  mounted(){
+    fetch('http://localhost:3000/api/Department')
+    .then(res => res.json())
+    .then(data => {this.departs = data; console.log(data);})
+    .catch(err => console.log(err.message))
+  }
 };
 </script>
 

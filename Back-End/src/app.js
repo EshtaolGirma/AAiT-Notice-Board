@@ -23,7 +23,7 @@ app.use("/api/CourseMaterial", CourseMatRouter);
 app.use("/api/Department", DepartRouter);
 app.use("/api/Discussion", DiscussionRouter);
 app.use("/api/NewsFeed", NewsFeedRouter);
-// app.use("/api/User", UserRouter);
+app.use("/api/User", UserRouter);
 
 const DB_URI =
   "mongodb+srv://aait-notice-board:aait-notice-board@aait-notice-board.qq1go.mongodb.net/manjuDB?retryWrites=true&w=majority";

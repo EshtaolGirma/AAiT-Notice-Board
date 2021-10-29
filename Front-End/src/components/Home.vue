@@ -2,62 +2,20 @@
   <div class="body-container" id="content">
     <div class="newsfeed-card-container">
       <!-- news feed card -->
-      <div class="card newsfeed">
+      <div class="card newsfeed" v-for="news in newsFeed" :key="news._id">
         <div class="card-body">
           <div class="green-box"></div>
-          <h5 class="card-title">Card title</h5>
+          <h5 class="card-title">{{news.title}}</h5>
           <hr />
           <!-- <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6> -->
           <p class="card-text">
-            One Family Entrance ticket of the graduation ceremony on Saturday
-            Oct 9, 2021 is prepared for students listed on the attachment and
-            additional 2 students Yusra and Eyuel From IT. You can take the
-            tickets on Oct 8,2021 from Department office on office hours.
-          </p>
-          <p class="card-text">
-            One Family Entrance ticket of the graduation ceremony on Saturday
-            Oct 9, 2021 is prepared for students listed on the attachment and
-            additional 2 students Yusra and Eyuel From IT. You can take the
-            tickets on Oct 8,2021 from Department office on office hours.
+           {{news.description}}
           </p>
         </div>
       </div>
       <!-- end of news feed card -->
-      <!-- news feed card -->
-      <div class="card newsfeed">
-        <div class="card-body">
-          <div class="green-box"></div>
-          <h5 class="card-title">Card title</h5>
-          <!-- <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6> -->
-          <hr />
-          <p class="card-text">
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content. Some quick example text to build on the
-            card title and make up the bulk of the card's content. Some quick
-            example text to build on the card title and make up the bulk of the
-            card's content.
-          </p>
-          <p class="card-text">
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
-          </p>
-        </div>
-      </div>
-      <!-- end of news feed card -->
-      <!-- news feed card -->
-      <div class="card newsfeed">
-        <div class="card-body">
-          <div class="green-box"></div>
-          <h5 class="card-title">Lard title</h5>
-          <!-- <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6> -->
-          <hr />
-          <p class="card-text">
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
-          </p>
-        </div>
-      </div>
-      <!-- end of news feed card -->
+     
+     
     </div>
   </div>
 </template>
@@ -65,9 +23,18 @@
 <script>
 export default {
   name: "Home",
-  props: {
-    msg: String,
+  data(){
+    return{
+      newsFeed: []
+    }
+    
   },
+  mounted(){
+    fetch('http://localhost:3000/api/NewsFeed')
+    .then(res => res.json())
+    .then(data => {this.newsFeed = data.data;})
+    .catch(err => console.log(err.message))      
+    }
 };
 </script>
 
