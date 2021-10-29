@@ -8,7 +8,7 @@ const NewsFeed = require("../Models/NewsFeedModel");
 const Student = require("../Models/users/StudentsModel");
 const Admin = require("../Models/users/AdminModel");
 const DeptAdmin = require("../Models/users/DeptAdminModel");
-const DeptAdminModel = require("../Models/users/DeptAdminModel");
+// const DeptAdminModel = require("../Models/users/DeptAdminModel");
 const TOKEN_KEY = "thisisthesecretkey"
 
 
@@ -150,7 +150,7 @@ function updateUser(req, res) {
 function deleteUserByID(req, res) {
     const id = req.params.stuId;
     console.log(id);
-    Student.remove({ _id: id })
+    Student.deleteOne({ _id: id })
         .exec()
         .then((result) => {
             res.status(200).json(result);
@@ -290,6 +290,8 @@ function postAdmin(req,res){
         res.status(400).send("All input is required");
     }
     encryptedPassword = bcrypt.hash(password, 10);
+
+    console.log(encryptedPassword);
 
 
     const admin = new Admin({
