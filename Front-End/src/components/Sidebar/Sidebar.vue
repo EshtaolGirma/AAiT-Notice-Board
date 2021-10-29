@@ -12,12 +12,11 @@
       <ul class="list-unstyled components" >
         
         <li>
-          <router-link to="/"><i class="fas fa-home"></i>Home</router-link>
+          <router-link :to="{name:'Home'}"><i class="fas fa-home"></i>Home</router-link>
         </li>
 
         <li>
-          <router-link to="/about"
-            ><i class="fas fa-question-circle"></i>About</router-link
+          <router-link :to="{name: 'About'}"><i class="fas fa-question-circle"></i>About</router-link
           >
         </li>
         <li>
@@ -28,43 +27,10 @@
             class="dropdown-toggle"
             ><i class="fas fa-book"></i>Departments</a
           >
-          <ul class="collapse list-unstyled" id="pageSubmenu" v-for="dept in departs" :key="dept._id">
-            <li>
+          <ul class="collapse list-unstyled" id="pageSubmenu">
+            <li v-for="dept in departs" :key="dept._id">
               <router-link :to="{name:'Departments', params:{id: dept._id}, query:{id: dept._id}}"><i class="fas fa-book"></i>{{dept.name}}</router-link>
             </li>
-            <!-- <li>
-              <router-link to="/"><i class="fas fa-book"></i>Pre</router-link>
-            </li>
-            <li>
-              <router-link to="/"
-                ><i class="fas fa-microscope"></i>BioMedical</router-link
-              >
-            </li>
-            <li>
-              <router-link to="/"
-                ><i class="fas fa-bong"></i>Chemical</router-link
-              >
-            </li>
-            <li>
-              <router-link to="/"
-                ><i class="fas fa-drafting-compass"></i>Civil</router-link
-              >
-            </li>
-            <li>
-              <router-link to="/"
-                ><i class="fas fa-car-battery"></i>Electrical</router-link
-              >
-            </li>
-            <li>
-              <router-link to="/">
-                <i class="fas fa-wrench"></i>Mechanical</router-link
-              >
-            </li>
-            <li>
-              <router-link to="/"
-                ><i class="fas fa-laptop-code"></i>SITE</router-link
-              >
-            </li> -->
           </ul>
         </li>
         <li></li>
@@ -78,8 +44,7 @@
           >
           <ul class="collapse list-unstyled" id="pageSubmenu2">
             <li>
-              <router-link to="/profile"
-                ><i class="fas fa-user-circle"></i>Profile</router-link
+              <router-link :to="{name: 'Profile'}"><i class="fas fa-user-circle"></i>Profile</router-link
               >
             </li>
             <li>
@@ -96,7 +61,7 @@
         </li>
 
         <li>
-          <router-link to="/contact-us"
+          <router-link :to="{name:'Contact-Us'}"
             ><i class="fas fa-id-card-alt"></i>Contact Us</router-link
           >
         </li>

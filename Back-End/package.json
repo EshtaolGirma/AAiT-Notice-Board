@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "ansi-regex": "^5.0.1",
     "bcrypt": "^5.0.1",
     "driver": "^1.0.0",
     "express": "^4.17.1",
