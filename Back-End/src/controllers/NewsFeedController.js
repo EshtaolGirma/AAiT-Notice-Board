@@ -79,12 +79,13 @@ module.exports = {
   },
   //POST
   post: (req, res) => {
+    var date = new Date(req.body.postDate);
     const newsFeed = new NewsFeed({
       _id: new mongoose.Types.ObjectId(),
       title: req.body.title,
       description: req.body.description,
       deptId: req.body.deptId,
-      postDate: req.body.postDate
+      postDate: date
     });
     newsFeed
       .save()

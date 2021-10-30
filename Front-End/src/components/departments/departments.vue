@@ -136,7 +136,7 @@
         role="tabpanel"
         aria-labelledby="nav-add-course-tab"
       >
-        <AddCourse />
+        <AddCourse :dept="depart"/>
       </div>
       <!-- end of add courses tab -->
     </div>
