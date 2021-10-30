@@ -1,45 +1,64 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
-
-// "Course": {
-//     "id": "Integer, PK",
-//     "name": "String",
-//     "year": "Integer",
-//     "Semester": "Integer",
-//     "instructor": "String //get update every semester",
-//     "description": "String",
-//     "deptID": "Integer //foreign key"
-//   },
 const courseSchema = mongoose.Schema({
-    _id: mongoose.Schema.Types.ObjectId,
-    name: {
-        type: String,
-        required: true,
+  _id: mongoose.Schema.Types.ObjectId,
+  name: {
+    type: String,
+    required: true,
+  },
+  year: {
+    type: Number,
+    required: true,
+  },
+  semester: {
+    type: Number,
+    required: true,
+  },
+  ECTS: {
+    type: Number,
+    required: true,
+  },
+  creditHour: {
+    type: Number,
+    required: true,
+  },
+  LecturerName: {
+    type: String,
+    required: true,
+  },
+  LecturerOffice: {
+    type: String,
+    required: true,
+  },
+  LecturerOfficeHour: [
+    {
+      type: String,
+      required: true,
     },
-    year: {
-        type: Number,
-        required: true,
+  ],
+  LabAssistanceName: {
+    type: String,
+    required: true,
+  },
+  LabAssistanceOffice: {
+    type: String,
+    required: true,
+  },
+  LabAssistanceOfficeHour: [
+    {
+      type: String,
+      required: true,
     },
-    semester: {
-        type: Number,
-        required: true,
-    },
-    instructor: {
-        type: String,
-        required: false,
-    },
-    description: {
-        type: String,
-        required: false,
-    },
-    dept_id: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Department",
-        required: false,
-    },
+  ],
+  description: {
+    type: String,
+    required: false,
+  },
+  dept_id: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Department",
+    required: false,
+  },
 });
 
-
-
-
-module.exports = mongoose.model('Course', courseSchema);
+module.exports = mongoose.model("Course", courseSchema);

@@ -11,6 +11,34 @@ const departmentSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  deanName: {
+    type: String,
+    required: true,
+  },
+  deanOffice: {
+    type: String,
+    required: true,
+  },
+  deanOfficeHour: [
+    {
+      type: String,
+      required: true,
+    },
+  ],
+  advisorName: {
+    type: String,
+    required: true,
+  },
+  advisorOffice: {
+    type: String,
+    required: true,
+  },
+  advisorOfficeHour: [
+    {
+      type: String,
+      required: true,
+    },
+  ],
   courses: [
     {
       type: mongoose.Schema.Types.ObjectId,

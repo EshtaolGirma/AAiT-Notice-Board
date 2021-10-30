@@ -2,7 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
 const log = console.log;
-const port = process.env.PORT || 3000; // for hosting purposes
+const port = process.env.PORT || 4000; // for hosting purposes
 
 app.use(
   express.urlencoded({

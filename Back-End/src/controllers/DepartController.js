@@ -5,6 +5,7 @@ const Department = require("../Models/DepartModel");
 // get list of all department
 function getDepartment(_, res) {
   Department.find()
+    .populate("newsFeeds")
     .exec()
     .then((doc) => {
       if (doc) {
@@ -49,6 +50,12 @@ function postDepartment(req, res) {
     _id: new mongoose.Types.ObjectId(),
     name: req.body.name,
     description: req.body.description,
+    deanName: req.body.deanName,
+    deanOffice: req.body.deanOffice,
+    deanOfficeHour: req.body.deanOfficeHour,
+    advisorName: req.body.advisorName,
+    advisorOffice: req.body.advisorOffice,
+    advisorOfficeHour: req.body.advisorOfficeHour,
   });
 
   department

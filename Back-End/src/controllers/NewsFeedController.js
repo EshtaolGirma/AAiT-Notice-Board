@@ -89,7 +89,10 @@ module.exports = {
     newsFeed
       .save()
       .then((result) => {
-        // Department.updateOne({_id: req.body.deptId}, {$push:{newsFeed: newsFeed._id }}).exec();
+        Department.updateOne(
+          { _id: req.body.deptId },
+          { $push: { newsFeeds: newsFeed._id } }
+        ).exec();
         res.status(200).json({
           message: "Posted successfully",
           PostedData: result,
