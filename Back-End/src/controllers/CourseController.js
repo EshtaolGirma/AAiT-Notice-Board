@@ -28,37 +28,42 @@ function getCourse(req, res) {
 }
 
 // Post Course
-
 function postCourse(req, res) {
     const course = new Course({
         _id: new mongoose.Types.ObjectId(),
+        dept_id: req.body.dept_id,
         name: req.body.name,
         year: req.body.year,
         semester: req.body.semester,
-        instructor: req.body.instructor,
+        ECTS: req.body.ECTS,
+        creditHour: req.body.creditHour,
+        LecturerName: req.body.LecturerName,
+        LecturerOffice: req.body.LecturerOffice,
+        LecturerOfficeHour: req.body.LecturerOfficeHour,
+        LabAssistanceName: req.body.LabAssistanceName,
+        LabAssistanceOffice: req.body.LabAssistanceOffice,
+        LabAssistanceOfficeHour: req.body.LabAssistanceOfficeHour,
         description: req.body.description,
     });
 
     course
         .save()
-        .then(result => {
+        .then((result) => {
             Department.updateOne(
-                { _id: req.body.deptId },
+                { _id: req.body.dept_id },
                 { $push: { courses: course._id } }
-              ).exec();
+            ).exec();
             res.status(201).json({
                 message: "posting..",
-                createdCourse: result
+                createdCourse: result,
             });
-            console.log("posting")
+            console.log("posting");
         })
-        .catch(err => {
-
+        .catch((err) => {
             res.status(500).json({
-                error: err
+                error: err,
             });
         });
-
 }
 
 // Get Course by id
