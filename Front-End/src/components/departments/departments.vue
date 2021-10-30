@@ -103,7 +103,7 @@
         role="tabpanel"
         aria-labelledby="nav-news-feed-tab"
       >
-        <NewsFeed />
+        <NewsFeed :dept="depart" />
       </div>
       <!-- end of news feed tab -->
 
@@ -114,7 +114,7 @@
         role="tabpanel"
         aria-labelledby="nav-course-tab"
       >
-        <CourseTab />
+        <CourseTab :dept="depart" />
       </div>
       <!-- end of courses tab -->
 
@@ -125,7 +125,7 @@
         role="tabpanel"
         aria-labelledby="nav-post-news-feed-tab"
       >
-        <PostNewsFeed />
+        <PostNewsFeed  :dept="depart"/>
       </div>
       <!-- end of post news feed tab -->
 
@@ -136,7 +136,7 @@
         role="tabpanel"
         aria-labelledby="nav-add-course-tab"
       >
-        <AddCourse />
+        <AddCourse :dept="depart"/>
       </div>
       <!-- end of add courses tab -->
     </div>
@@ -151,12 +151,38 @@ import PostNewsFeed from "./tabs/adminView/addNewsFeedTab.vue";
 import AddCourse from "./tabs/adminView/addCourseTab.vue";
 
 export default {
+  data(){
+    return{
+        depart:{},
+        id: this.$route.query.id,
+        
+    }
+
+  },
   components: {
     CourseTab,
     NewsFeed,
     PostNewsFeed,
     AddCourse,
   },
+ 
+  updated(){
+    if ( this.id != this.$route.query.id){
+      this.id = this.$route.query.id;
+      fetch('http://localhost:3000/api/Department/' + this.id)
+      .then(res => res.json())
+      .then(data => {this.depart = data; console.log(data);})
+      .catch(err => console.log(err.message))
+    }
+    
+  },
+  mounted(){
+    fetch('http://localhost:3000/api/Department/' + this.id)
+    .then(res => res.json())
+    .then(data => {this.depart = data; console.log(data);})
+    .catch(err => console.log(err.message))
+
+  }
 };
 </script>
 <style scoped>

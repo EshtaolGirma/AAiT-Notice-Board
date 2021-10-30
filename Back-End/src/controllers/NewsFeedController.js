@@ -79,22 +79,20 @@ module.exports = {
   },
   //POST
   post: (req, res) => {
+    var date = new Date(req.body.postDate);
     const newsFeed = new NewsFeed({
       _id: new mongoose.Types.ObjectId(),
       title: req.body.title,
       description: req.body.description,
       deptId: req.body.deptId,
-      postDate: req.body.postDate,
+      postDate: date
     });
     newsFeed
       .save()
       .then((result) => {
-        Department.updateOne(
-          { _id: req.body.deptId },
-          { $push: { newsFeeds: newsFeed._id } }
-        ).exec();
+        Department.updateOne({_id: req.body.deptId}, {$push:{newsFeeds: newsFeed._id }}).exec();
         res.status(200).json({
-          message: "Posted successfully",
+          message: "Posted successfully", 
           PostedData: result,
         });
       })

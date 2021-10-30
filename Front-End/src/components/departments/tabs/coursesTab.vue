@@ -1,7 +1,7 @@
 <template>
 <div>
   <h3 class="tab-title" style="margin-left: 50px; color: #121c41">
-    X Department Courses
+    {{dept.name}} Department Courses
   </h3>
   <hr />
 
@@ -35,40 +35,19 @@
                 <th>Course Type</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <td>
-                  <a href="/"> <a href="/"> Applied Math I </a> </a>
-                </td>
-                <td>7.00</td>
-                <td>3.00</td>
-                <td>Major</td>
-              </tr>
-
-              <tr>
-                <td><a href="/"> Applied Math I </a></td>
-                <td>7.00</td>
-                <td>4.00</td>
-                <td>Major</td>
-              </tr>
-              <tr>
-                <td><a href="/"> Applied Math I </a></td>
-                <td>7.00</td>
-                <td>4.00</td>
-                <td>Major</td>
-              </tr>
-              <tr>
-                <td><a href="/"> Applied Math I </a></td>
-                <td>7.00</td>
-                <td>3.00</td>
-                <td>Major</td>
-              </tr>
-              <tr>
-                <td><a href="/"> Applied Math I </a></td>
-                <td>7.00</td>
-                <td>4.00</td>
-                <td>Major</td>
-              </tr>
+            <tbody v-for="course in dept.courses" :key="course">
+              
+                <tr v-if="course.year == 1 && course.semester == 1">
+                  <td>
+                    <router-link :to="{name:'Courses', params:{id:course._id}, query:{id:course._id}}">{{course.name}} </router-link>
+                    
+                  </td>
+                  <td>{{course.ECTS}}</td>
+                  <td>{{course.creditHour}}</td>
+                  <td>Major</td>
+                </tr>
+              
+              
             </tbody>
           </table>
         </div>
@@ -83,43 +62,17 @@
                 <th>Course Type</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
+            <tbody v-for="course in dept.courses" :key="course">
+              <tr v-if="course.year == 1 && course.semester == 2">
                 <td>
-                  <a href="/"> <a href="/"> Applied Math I </a> </a>
+                  <router-link :to="{name:'Courses', params:{id:course._id}, query:{id:course._id}}">{{course.name}} </router-link>
                 </td>
-                <td>7.00</td>
-                <td>3.00</td>
+                <td>{{course.ECTS}}</td>
+                <td>{{course.creditHour}}</td>
                 <td>Major</td>
               </tr>
 
-              <tr>
-                <td><a href="/"> Applied Math I </a></td>
-                <td>7.00</td>
-                <td>4.00</td>
-                <td>Major</td>
-              </tr>
-
-              <tr>
-                <td><a href="/"> Applied Math I </a></td>
-                <td>7.00</td>
-                <td>4.00</td>
-                <td>Major</td>
-              </tr>
-
-              <tr>
-                <td><a href="/"> Applied Math I </a></td>
-                <td>7.00</td>
-                <td>4.00</td>
-                <td>Major</td>
-              </tr>
-
-              <tr>
-                <td><a href="/"> Applied Math I </a></td>
-                <td>7.00</td>
-                <td>4.00</td>
-                <td>Major</td>
-              </tr>
+              
             </tbody>
           </table>
         </div>
@@ -157,40 +110,17 @@
                 <th>Course Type</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
+            <tbody v-for="course in dept.courses" :key="course">
+              <tr v-if="course.year == 2 && course.semester == 1">
                 <td>
-                  <a href="/"> <a href="/"> Applied Math I </a> </a>
+                  <router-link :to="{name:'Courses', params:{id:course._id}, query:{id:course._id}}">{{course.name}} </router-link>
                 </td>
-                <td>7.00</td>
-                <td>3.00</td>
+                <td>{{course.ECTS}}</td>
+                <td>{{course.creditHour}}</td>
                 <td>Major</td>
               </tr>
 
-              <tr>
-                <td><a href="/"> Applied Math I </a></td>
-                <td>7.00</td>
-                <td>4.00</td>
-                <td>Major</td>
-              </tr>
-              <tr>
-                <td><a href="/"> Applied Math I </a></td>
-                <td>7.00</td>
-                <td>4.00</td>
-                <td>Major</td>
-              </tr>
-              <tr>
-                <td><a href="/"> Applied Math I </a></td>
-                <td>7.00</td>
-                <td>3.00</td>
-                <td>Major</td>
-              </tr>
-              <tr>
-                <td><a href="/"> Applied Math I </a></td>
-                <td>7.00</td>
-                <td>4.00</td>
-                <td>Major</td>
-              </tr>
+              
             </tbody>
           </table>
         </div>
@@ -205,43 +135,16 @@
                 <th>Course Type</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
+            <tbody v-for="course in dept.courses" :key="course">
+              <tr v-if="course.year == 2 && course.semester == 2">
                 <td>
-                  <a href="/"> <a href="/"> Applied Math I </a> </a>
+                  <router-link :to="{name:'Courses', params:{id:course._id}, query:{id:course._id}}">{{course.name}} </router-link>
                 </td>
-                <td>7.00</td>
-                <td>3.00</td>
+                <td>{{course.ECTS}}</td>
+                <td>{{course.creditHour}}</td>
                 <td>Major</td>
               </tr>
 
-              <tr>
-                <td><a href="/"> Applied Math I </a></td>
-                <td>7.00</td>
-                <td>4.00</td>
-                <td>Major</td>
-              </tr>
-
-              <tr>
-                <td><a href="/"> Applied Math I </a></td>
-                <td>7.00</td>
-                <td>4.00</td>
-                <td>Major</td>
-              </tr>
-
-              <tr>
-                <td><a href="/"> Applied Math I </a></td>
-                <td>7.00</td>
-                <td>4.00</td>
-                <td>Major</td>
-              </tr>
-
-              <tr>
-                <td><a href="/"> Applied Math I </a></td>
-                <td>7.00</td>
-                <td>4.00</td>
-                <td>Major</td>
-              </tr>
             </tbody>
           </table>
         </div>
@@ -271,7 +174,7 @@
         <div class="col first-semester-table">
           <p>First Semester Courses</p>
           <table class="table table-hover course-table">
-            <thead>
+            <thead >
               <tr>
                 <th>Course Name</th>
                 <th>ECTS</th>
@@ -279,40 +182,16 @@
                 <th>Course Type</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
+            <tbody v-for="course in dept.courses" :key="course">
+              <tr v-if="course.year == 3 && course.semester == 1">
                 <td>
-                  <a href="/"> <a href="/"> Applied Math I </a> </a>
+                  <router-link :to="{name:'Courses', params:{id:course._id}, query:{id:course._id}}">{{course.name}} </router-link>
                 </td>
-                <td>7.00</td>
-                <td>3.00</td>
+                <td>{{course.ECTS}}</td>
+                <td>{{course.creditHour}}</td>
                 <td>Major</td>
               </tr>
 
-              <tr>
-                <td><a href="/"> Applied Math I </a></td>
-                <td>7.00</td>
-                <td>4.00</td>
-                <td>Major</td>
-              </tr>
-              <tr>
-                <td><a href="/"> Applied Math I </a></td>
-                <td>7.00</td>
-                <td>4.00</td>
-                <td>Major</td>
-              </tr>
-              <tr>
-                <td><a href="/"> Applied Math I </a></td>
-                <td>7.00</td>
-                <td>3.00</td>
-                <td>Major</td>
-              </tr>
-              <tr>
-                <td><a href="/"> Applied Math I </a></td>
-                <td>7.00</td>
-                <td>4.00</td>
-                <td>Major</td>
-              </tr>
             </tbody>
           </table>
         </div>
@@ -327,43 +206,17 @@
                 <th>Course Type</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <td>
-                  <a href="/"> <a href="/"> Applied Math I </a> </a>
-                </td>
-                <td>7.00</td>
-                <td>3.00</td>
-                <td>Major</td>
-              </tr>
-
-              <tr>
-                <td><a href="/"> Applied Math I </a></td>
-                <td>7.00</td>
-                <td>4.00</td>
-                <td>Major</td>
-              </tr>
-
-              <tr>
-                <td><a href="/"> Applied Math I </a></td>
-                <td>7.00</td>
-                <td>4.00</td>
-                <td>Major</td>
-              </tr>
-
-              <tr>
-                <td><a href="/"> Applied Math I </a></td>
-                <td>7.00</td>
-                <td>4.00</td>
-                <td>Major</td>
-              </tr>
-
-              <tr>
-                <td><a href="/"> Applied Math I </a></td>
-                <td>7.00</td>
-                <td>4.00</td>
-                <td>Major</td>
-              </tr>
+            <tbody v-for="course in dept.courses" :key="course">
+                <tr v-if="course.year == 3 && course.semester == 2">
+                  <td>
+                     <router-link :to="{name:'Courses', params:{id:course._id}, query:{id:course._id}}">{{course.name}} </router-link>
+                  </td>
+                  <td>{{course.ECTS}}</td>
+                  <td>{{course.creditHour}}</td>
+                  <td>Major</td>
+                  
+                </tr>
+              
             </tbody>
           </table>
         </div>
@@ -382,7 +235,7 @@
           aria-expanded="false"
           aria-controls="fourtd-year-material"
         >
-          Fourtd Year Courses
+          Fourth Year Courses
         </a>
       </h5>
     </div>
@@ -401,40 +254,16 @@
                 <th>Course Type</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
+            <tbody v-for="course in dept.courses" :key="course">
+              <tr v-if="course.year == 4 && course.semester == 1">
                 <td>
-                  <a href="/"> <a href="/"> Applied Math I </a> </a>
+                  <router-link :to="{name:'Courses', params:{id:course._id}, query:{id:course._id}}">{{course.name}} </router-link>
                 </td>
-                <td>7.00</td>
-                <td>3.00</td>
+                <td>{{course.ECTS}}</td>
+                <td>{{course.creditHour}}</td>
                 <td>Major</td>
               </tr>
 
-              <tr>
-                <td><a href="/"> Applied Math I </a></td>
-                <td>7.00</td>
-                <td>4.00</td>
-                <td>Major</td>
-              </tr>
-              <tr>
-                <td><a href="/"> Applied Math I </a></td>
-                <td>7.00</td>
-                <td>4.00</td>
-                <td>Major</td>
-              </tr>
-              <tr>
-                <td><a href="/"> Applied Math I </a></td>
-                <td>7.00</td>
-                <td>3.00</td>
-                <td>Major</td>
-              </tr>
-              <tr>
-                <td><a href="/"> Applied Math I </a></td>
-                <td>7.00</td>
-                <td>4.00</td>
-                <td>Major</td>
-              </tr>
             </tbody>
           </table>
         </div>
@@ -449,43 +278,16 @@
                 <th>Course Type</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
+            <tbody v-for="course in dept.courses" :key="course">
+              <tr v-if="course.year == 4 && course.semester == 2">
                 <td>
-                  <a href="/"> <a href="/"> Applied Math I </a> </a>
+                  <router-link :to="{name:'Courses', params:{id:course._id}, query:{id:course._id}}">{{course.name}} </router-link>
                 </td>
-                <td>7.00</td>
-                <td>3.00</td>
+                <td>{{course.ECTS}}</td>
+                <td>{{course.creditHour}}</td>
                 <td>Major</td>
               </tr>
 
-              <tr>
-                <td><a href="/"> Applied Math I </a></td>
-                <td>7.00</td>
-                <td>4.00</td>
-                <td>Major</td>
-              </tr>
-
-              <tr>
-                <td><a href="/"> Applied Math I </a></td>
-                <td>7.00</td>
-                <td>4.00</td>
-                <td>Major</td>
-              </tr>
-
-              <tr>
-                <td><a href="/"> Applied Math I </a></td>
-                <td>7.00</td>
-                <td>4.00</td>
-                <td>Major</td>
-              </tr>
-
-              <tr>
-                <td><a href="/"> Applied Math I </a></td>
-                <td>7.00</td>
-                <td>4.00</td>
-                <td>Major</td>
-              </tr>
             </tbody>
           </table>
         </div>
@@ -523,40 +325,16 @@
                 <th>Course Type</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
+            <tbody v-for="course in dept.courses" :key="course">
+              <tr v-if="course.year == 5 && course.semester == 1">
                 <td>
-                  <a href="/"> <a href="/"> Applied Math I </a> </a>
+                  <router-link :to="{name:'Courses', params:{id:course._id}, query:{id:course._id}}">{{course.name}} </router-link>
                 </td>
-                <td>7.00</td>
-                <td>3.00</td>
+                <td>{{course.ECTS}}</td>
+                <td>{{course.creditHour}}</td>
                 <td>Major</td>
               </tr>
 
-              <tr>
-                <td><a href="/"> Applied Math I </a></td>
-                <td>7.00</td>
-                <td>4.00</td>
-                <td>Major</td>
-              </tr>
-              <tr>
-                <td><a href="/"> Applied Math I </a></td>
-                <td>7.00</td>
-                <td>4.00</td>
-                <td>Major</td>
-              </tr>
-              <tr>
-                <td><a href="/"> Applied Math I </a></td>
-                <td>7.00</td>
-                <td>3.00</td>
-                <td>Major</td>
-              </tr>
-              <tr>
-                <td><a href="/"> Applied Math I </a></td>
-                <td>7.00</td>
-                <td>4.00</td>
-                <td>Major</td>
-              </tr>
             </tbody>
           </table>
         </div>
@@ -571,43 +349,16 @@
                 <th>Course Type</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
+            <tbody v-for="course in dept.courses" :key="course">
+              <tr v-if="course.year == 5 && course.semester == 2">
                 <td>
-                  <a href="/"> <a href="/"> Applied Math I </a> </a>
+                  <router-link :to="{name:'Courses', params:{id:course._id}, query:{id:course._id}}">{{course.name}} </router-link>
                 </td>
-                <td>7.00</td>
-                <td>3.00</td>
+               <td>{{course.ECTS}}</td>
+                <td>{{course.creditHour}}</td>
                 <td>Major</td>
               </tr>
 
-              <tr>
-                <td><a href="/"> Applied Math I </a></td>
-                <td>7.00</td>
-                <td>4.00</td>
-                <td>Major</td>
-              </tr>
-
-              <tr>
-                <td><a href="/"> Applied Math I </a></td>
-                <td>7.00</td>
-                <td>4.00</td>
-                <td>Major</td>
-              </tr>
-
-              <tr>
-                <td><a href="/"> Applied Math I </a></td>
-                <td>7.00</td>
-                <td>4.00</td>
-                <td>Major</td>
-              </tr>
-
-              <tr>
-                <td><a href="/"> Applied Math I </a></td>
-                <td>7.00</td>
-                <td>4.00</td>
-                <td>Major</td>
-              </tr>
             </tbody>
           </table>
         </div>
@@ -616,7 +367,20 @@
   </div>
 </div>
 </template>
+<script>
+  export default{
+    props:{
+        dept:{
+          type: Object
+        }
+    },
+     data(){
+       return{
 
+       }
+     }
+  }
+</script>
 <style scoped>
 a {
   text-decoration: none;

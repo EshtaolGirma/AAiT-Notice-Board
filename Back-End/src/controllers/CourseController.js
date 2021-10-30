@@ -25,7 +25,6 @@ function getCourse(req, res) {
 }
 
 // Post Course
-
 function postCourse(req, res) {
   const course = new Course({
     _id: new mongoose.Types.ObjectId(),
