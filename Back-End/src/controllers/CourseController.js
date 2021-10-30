@@ -42,7 +42,10 @@ function postCourse(req, res) {
     course
         .save()
         .then(result => {
-
+            Department.updateOne(
+                { _id: req.body.deptId },
+                { $push: { courses: course._id } }
+              ).exec();
             res.status(201).json({
                 message: "posting..",
                 createdCourse: result

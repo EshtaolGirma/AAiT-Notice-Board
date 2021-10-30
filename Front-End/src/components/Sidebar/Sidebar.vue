@@ -29,7 +29,7 @@
           >
           <ul class="collapse list-unstyled" id="pageSubmenu">
             <li v-for="dept in departs" :key="dept._id">
-              <router-link :to="{name:'Departments', params:{id: dept._id}, query:{id: dept._id}}"><i class="fas fa-book"></i>{{dept.name}}</router-link>
+              <router-link :to="{name:'Departments', params:{id: dept._id}, query:{id:dept._id}}"><i class="fas fa-book"></i>{{dept.name}}</router-link>
             </li>
           </ul>
         </li>
@@ -112,7 +112,7 @@ export default {
   mounted(){
     fetch('http://localhost:3000/api/Department')
     .then(res => res.json())
-    .then(data => {this.departs = data; console.log(data);})
+    .then(data => this.departs = data )
     .catch(err => console.log(err.message))
   }
 };

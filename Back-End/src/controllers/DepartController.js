@@ -4,7 +4,7 @@ const Department = require("../Models/DepartModel");
 
 // get list of all department
 function getDepartment(_, res) {
-  Department.find()
+  Department.find().populate("newsFeeds").populate("courses")
     .exec()
     .then((doc) => {
       if (doc) {
@@ -27,7 +27,7 @@ function getDepartment(_, res) {
 
 function getDepartmentById(req, res) {
   const id = req.params.departmentID;
-  Department.findById(id)
+  Department.findById(id).populate("newsFeeds").populate("courses")
     .exec()
     .then((doc) => {
       if (doc) {

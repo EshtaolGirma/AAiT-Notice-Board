@@ -1,67 +1,42 @@
 <template>
+<div>
   <h3 class="tab-title" style="margin-left: 50px; color: #121c41">
-    X Department News Feed
+    {{dept.name}}'s News Feed 
   </h3>
   <hr />
 
   <div class="newsfeed-card-container">
-    <div class="card newsfeed">
+    <div class="card newsfeed" v-for="news in dept.newsFeeds" :key="news._id">
       <div class="card-body">
         <div class="green-box"></div>
-        <h5 class="card-title">Card title</h5>
+        <h5 class="card-title">{{news.title}}</h5>
         <hr />
         <!-- <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6> -->
         <p class="card-text">
-          One Family Entrance ticket of the graduation ceremony on Saturday Oct
-          9, 2021 is prepared for students listed on the attachment and
-          additional 2 students Yusra and Eyuel From IT. You can take the
-          tickets on Oct 8,2021 from Department office on office hours.
-        </p>
-        <p class="card-text">
-          One Family Entrance ticket of the graduation ceremony on Saturday Oct
-          9, 2021 is prepared for students listed on the attachment and
-          additional 2 students Yusra and Eyuel From IT. You can take the
-          tickets on Oct 8,2021 from Department office on office hours.
+         {{news.description}}
         </p>
       </div>
     </div>
   </div>
 
-  <div class="newsfeed-card-container">
-    <div class="card newsfeed">
-      <div class="card-body">
-        <div class="green-box"></div>
-        <h5 class="card-title">Card title</h5>
-        <hr />
-        <!-- <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6> -->
-        <p class="card-text">
-          One Family Entrance ticket of the graduation ceremony on Saturday Oct
-          9, 2021 is prepared for students listed on the attachment and
-          additional 2 students Yusra and Eyuel From IT. You can take the
-          tickets on Oct 8,2021 from Department office on office hours.
-        </p>
-      </div>
-    </div>
-  </div>
-
-  <div class="newsfeed-card-container">
-    <div class="card newsfeed">
-      <div class="card-body">
-        <div class="green-box"></div>
-        <h5 class="card-title">Card title</h5>
-        <hr />
-        <!-- <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6> -->
-        <p class="card-text">
-          One Family Entrance ticket of the graduation ceremony on Saturday Oct
-          9, 2021 is prepared for students listed on the attachment and
-          additional 2 students Yusra and Eyuel From IT. You can take the
-          tickets on Oct 8,2021 from Department office on office hours.
-        </p>
-      </div>
-    </div>
+  
   </div>
 </template>
 
+<script>
+  export default{
+    props:{
+        dept:{
+          type: Object
+        }
+    },
+     data(){
+       return{
+
+       }
+     }
+  }
+</script>
 
 <style scoped>
 a {

@@ -84,14 +84,14 @@ module.exports = {
       title: req.body.title,
       description: req.body.description,
       deptId: req.body.deptId,
-      postDate: req.body.postDate,
+      postDate: req.body.postDate
     });
     newsFeed
       .save()
       .then((result) => {
-        // Department.updateOne({_id: req.body.deptId}, {$push:{newsFeed: newsFeed._id }}).exec();
+        Department.updateOne({_id: req.body.deptId}, {$push:{newsFeeds: newsFeed._id }}).exec();
         res.status(200).json({
-          message: "Posted successfully",
+          message: "Posted successfully", 
           PostedData: result,
         });
       })
