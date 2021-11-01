@@ -20,23 +20,22 @@
           <tr>
             <th scope="row">Dean</th>
 
-            <td>Dr. Manjunath</td>
-            <td>Pharm 101</td>
+            <td>{{depart.deanName}}</td>
+            <td>{{depart.deanOffice}}</td>
             <td>
-              <p>
-                Mon 9:00-12:00, <br />
-                Thu 14:00-17:00
+              <p  v-for="hr in depart.deanOfficeHour" :key="hr">
+                {{hr}} 
               </p>
+              
             </td>
           </tr>
           <tr>
             <th scope="row">Advisor</th>
-            <td>Dr. Manjunath</td>
-            <td>Pharm 101</td>
+            <td>{{depart.advisorName}}</td>
+            <td>{{depart.advisorOffice}}</td>
             <td>
-              <p>
-                Mon 9:00-12:00, <br />
-                Thu 14:00-17:00
+              <p v-for="ad in depart.advisorOfficeHour" :key="ad">
+                {{ad}}
               </p>
             </td>
           </tr>

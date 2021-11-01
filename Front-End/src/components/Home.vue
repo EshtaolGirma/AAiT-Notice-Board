@@ -1,11 +1,12 @@
 <template>
   <div class="body-container" id="content">
-    <div class="newsfeed-card-container">
+    <div class="newsfeed-card-container" >
       <!-- news feed card -->
-      <div class="card newsfeed" v-for="news in newsFeed" :key="news._id">
+      <div class="card newsfeed" v-for="news in newsFeed" :key="news._id" >
         <div class="card-body">
           <div class="green-box"></div>
           <h5 class="card-title">{{news.title}}</h5>
+          <p style="color: gray">{{news.postDate}}</p>
           <hr />
           <!-- <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6> -->
           <p class="card-text">
@@ -25,14 +26,15 @@ export default {
   name: "Home",
   data(){
     return{
-      newsFeed: []
+      newsFeed: [],
+      date: Date
     }
     
   },
   mounted(){
     fetch('http://localhost:3000/api/NewsFeed')
     .then(res => res.json())
-    .then(data => {this.newsFeed = data.data;})
+    .then(data => {this.newsFeed = data.data})
     .catch(err => console.log(err.message))      
     }
 };

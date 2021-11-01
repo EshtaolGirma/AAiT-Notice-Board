@@ -18,7 +18,6 @@
           </ul>
           </p>
       </div>
-      <input  type="hidden" v-model="id" :value="dept._id">
       <div class="title field">
         <label for="username">Title</label>
         <input type="text" class="form-control" placeholder="Title" v-model="title"/>
@@ -49,7 +48,6 @@
        return{
          title:'',
          message:'',
-         id:'',
          error:[]
        }
      },
@@ -58,12 +56,11 @@
      methods:{
     
        submit(e){
-         this.id = this.dept._id;
          if(this.title !=='' && this.message !==''){
            fetch('http://localhost:3000/api/NewsFeed', {
             method: 'POST',
             headers:{"Content-Type": "application/json"},
-            body: JSON.stringify({title: this.title, description:this.message, deptId: this.id, postDate: new Date()  })
+            body: JSON.stringify({title: this.title, description:this.message, deptId: this.dept._id, postDate: new Date()  })
 
            }).then(res => res.json())
            .then(data=> {console.log(data); window.location.reload();})

@@ -49,6 +49,12 @@ function postDepartment(req, res) {
     _id: new mongoose.Types.ObjectId(),
     name: req.body.name,
     description: req.body.description,
+    deanName: req.body.deanName,
+    deanOffice: req.body.deanOffice,
+    deanOfficeHour: req.body.deanOfficeHour,
+    advisorName: req.body.advisorName,
+    advisorOffice: req.body.advisorOffice,
+    advisorOfficeHour: req.body.advisorOfficeHour,
   });
 
   department

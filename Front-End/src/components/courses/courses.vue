@@ -13,20 +13,17 @@
 
             <td style="padding-left: 175px">
               <p>
-                &Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Possimus perferendis quas enim officiis, assumenda inventore
-                iste corrupti aperiam in nobis molestias accusamus, id, velit
-                nulla voluptatibus dolorem commodi iusto? Minus!
+                {{course.description}}
               </p>
             </td>
           </tr>
           <tr>
             <th scope="row">ECTS</th>
-            <td style="padding-left: 175px">7.00</td>
+            <td style="padding-left: 175px">{{course.ECTS}}</td>
           </tr>
           <tr>
             <th scope="row">Credit Hour</th>
-            <td style="padding-left: 175px">4.00</td>
+            <td style="padding-left: 175px">{{course.creditHour}}</td>
           </tr>
         </tbody>
       </table>
@@ -115,7 +112,7 @@
         role="tabpanel"
         aria-labelledby="nav-discussion-tab"
       >
-        <Discussion class="discussion" />
+        <Discussion class="discussion" :course="course"/>
       </div>
       <!-- end of course discussion tab -->
 
@@ -126,7 +123,7 @@
         role="tabpanel"
         aria-labelledby="nav-material-tab"
       >
-        <Material />
+        <Material :course="course"/>
       </div>
       <!-- end of course material tab -->
 
@@ -137,7 +134,7 @@
         role="tabpanel"
         aria-labelledby="nav-add-course-material-tab"
       >
-        <AddMaterial />
+        <AddMaterial :course="course"/>
       </div>
       <!-- end of add new course material tab -->
     </div>
@@ -151,11 +148,25 @@ import Material from "./tabs/materialTab.vue";
 import AddMaterial from "./tabs/adminView/addMaterialTab.vue";
 
 export default {
+  data(){
+    return{
+        course:{},
+        id: this.$route.query.id,
+        
+    }
+
+  },
   components: {
     Discussion,
     Material,
     AddMaterial,
   },
+  mounted(){
+    fetch('http://localhost:3000/api/Department/' + this.id)
+    .then(res => res.json())
+    .then(data => {this.course = data; console.log(data);})
+    .catch(err => console.log(err.message))
+  }
 };
 </script>
 
