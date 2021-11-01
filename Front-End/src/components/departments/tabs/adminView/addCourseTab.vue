@@ -10,9 +10,14 @@
         <h5 class="card-title">Course Detail</h5>
       </div>
       <form @submit.prevent="submit" method="post">
+        <div class="title field">
+            <p style="color: red;">
+              {{error}}
+            </p>
+          </div>
         <div class="form-group">
           <div class="title field col-6">
-            <label for="username" class="title">Course Name</label>
+            <label for="username" class="title">Course Name <span style="color: red">*</span></label>
             <input
               type="text"
               class="form-control"
@@ -23,7 +28,7 @@
 
           <div class="row field">
             <div class="col title">
-              <label for="username">Year</label>
+              <label for="username">Year <span style="color: red">*</span></label>
 
               <div class="row col-8">
                 <div class="col">
@@ -50,7 +55,7 @@
               </div>
             </div>
             <div class="col title">
-              <label for="username">Semester</label>
+              <label for="username">Semester <span style="color: red">*</span></label>
               <div class="row col-8">
                 <div class="col">
                   <input type="radio" name="semester" value="1" v-model="semseter" />
@@ -66,7 +71,7 @@
 
           <div class="row field">
             <div class="col title">
-              <label for="username">ECTS</label>
+              <label for="username">ECTS <span style="color: red">*</span></label>
               <input
                 type="number"
                 class="form-control"
@@ -75,7 +80,7 @@
               />
             </div>
             <div class="col title">
-              <label for="username">Credit Hours</label>
+              <label for="username">Credit Hours <span style="color: red">*</span></label>
               <input
                 type="number"
                 class="form-control"
@@ -85,7 +90,7 @@
             </div>
           </div>
           <div class="message field title">
-            <label for="email">Course General Description</label>
+            <label for="email">Course General Description <span style="color: red">*</span></label>
             <textarea
               v-model="description"
               class="form-control question-textarea"
@@ -98,7 +103,7 @@
 
         <div class="form-group">
           <div class="field col-7 title">
-            <label for="lec-name">Lecturer Name</label>
+            <label for="lec-name">Lecturer Name <span style="color: red">*</span></label>
             <div class="input-group lec">
               <select
                 class="custom-select"
@@ -122,7 +127,7 @@
 
           <div class="row field">
             <div class="col title">
-              <label for="username">Office</label>
+              <label for="username">Office <span style="color: red">*</span></label>
               <input
                 v-model="office"
                 type="text"
@@ -131,7 +136,7 @@
               />
             </div>
             <div class="col title">
-              <label for="username">Office Hours</label>
+              <label for="username">Office Hours <span style="color: red">*</span></label>
               <input
                 v-model="office_h"
                 type="text"
@@ -142,7 +147,7 @@
           </div>
 
           <div class="field col-7 title">
-            <label for="lec-name">Lab Assistance Name</label>
+            <label for="lec-name">Lab Assistance Name <span style="color: red">*</span></label>
             <div class="input-group lec">
               <select
                 class="custom-select"
@@ -167,7 +172,7 @@
 
           <div class="row field">
             <div class="col title">
-              <label for="username">Office</label>
+              <label for="username">Office <span style="color: red">*</span></label>
               <input
                 v-model="La_office"
                 type="text"
@@ -176,7 +181,7 @@
               />
             </div>
             <div class="col title">
-              <label for="username">Office Hours</label>
+              <label for="username">Office Hours <span style="color: red">*</span> </label>
               <input
                 v-model="La_office_hr"
                 type="text"
@@ -190,32 +195,6 @@
           <button type="submit" value="Submit" class="btn btn-success btn-detail-submit">
             Post
           </button>
-
-          <div class="title field">
-            <p v-if="error.length" style="color: red;">
-            <b>error(s):</b>
-            <ul>
-            <li v-for="err in error" :key="err">{{ err }}</li>
-            </ul>
-            </p>
-          </div>
-        </div>
-        <div>
-          {{course_name}}
-          {{year}}
-          {{semseter}}
-          {{ECTS}}
-          {{C_hours}}
-          {{description}}
-          {{prefix}}
-          {{Lr_name}}
-          {{office}}
-          {{office_h}}
-          {{La_prefix}}
-          {{La_name}}
-          {{La_office}}
-          {{La_office_hr}}
-          
         </div>
       </form>
     </div>
@@ -228,59 +207,56 @@ export default {
   },
   data() {
     return {
-      course_name: "",
-      year: 0,
-      semseter: 0,
-      ECTS: 0,
-      C_hours: 0,
-      description: "",
-      prefix: "",
-      Lr_name: "",
-      office: "",
-      office_h: "",
-      La_prefix: "",
-      La_name: "",
-      La_office: "",
-      La_office_hr: "",
-      error: [],
+      course_name: '',
+      year: '',
+      semseter: '',
+      ECTS: '',
+      C_hours: '',
+      description: '',
+      prefix: '',
+      Lr_name: '',
+      office: '',
+      office_h: '',
+      La_prefix: '',
+      La_name: '',
+      La_office: '',
+      La_office_hr: '',
+      error: ''
     };
   },
   methods: {
     submit(e) {
-      if (this.course_name !== "" && this.ECTS !== "") {
-        console.log("i am here");
+      if (this.course_name !== '' && this.ECTS !== '' && this.year !== '' && this.semseter !=='' && this.C_hours !=='' && this.description !=='' && this.C_hours !=='' 
+          && this.prefix !=='' && this.Lr_name !=='' && this.office !=='' && this.office_h !=='' && this.La_prefix !=='' && this.La_office !==''
+          && this.La_office_hr !=='' && this.La_name !=='') {
+        
         fetch("http://localhost:3000/api/Course", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            deptId: this.dept._id,
-            course_name: this.course_name,
+            dept_id: this.dept._id,
+            name: this.course_name,
             year: this.year,
-            semseter: this.semseter,
+            semester: this.semseter,
             ECTS: this.ECTS,
-            C_hours: this.C_hours,
+            creditHour: this.C_hours,
+            LecturerName: this.prefix + this.Lr_name,
+            LecturerOffice: this.office,
+            LecturerOfficeHour: this.office_h,
+            LabAssistanceName: this.La_prefix + this.La_name,
+            LabAssistanceOffice: this.La_office,
+            LabAssistanceOfficeHour: this.La_office_hr,
             description: this.description,
-            prefix: this.prefix,
-            Lr_name: this.Lr_name,
-            office: this.office,
-            office_h: this.office_h,
-            La_prefix: this.La_prefix,
-            La_name: this.La_name,
-            La_office: this.La_office,
-            La_office_hr: this.La_office_hr,
           }),
         })
           .then((res) => res.json())
-          .then((data) => console.log(data))
+          .then((data) =>{console.log(data); window.location.reload();})
           .catch((err) => console.log(err.message));
       }
-      this.error = [];
-      if (this.course_name == "") {
-        this.error.push("name is required");
+      else{
+        this.error = 'please fill out the required fields'
       }
-      if (this.ECTS == "") {
-        this.error.push("ECTS is required");
-      }
+      
       e.preventDefault();
     },
   },

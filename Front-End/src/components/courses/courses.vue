@@ -162,7 +162,7 @@ export default {
     AddMaterial,
   },
   mounted(){
-    fetch('http://localhost:3000/api/Department/' + this.id)
+    fetch('http://localhost:3000/api/Course/' + this.id)
     .then(res => res.json())
     .then(data => {this.course = data; console.log(data);})
     .catch(err => console.log(err.message))

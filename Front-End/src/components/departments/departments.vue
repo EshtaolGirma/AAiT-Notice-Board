@@ -170,7 +170,7 @@ export default {
       this.id = this.$route.query.id;
       fetch('http://localhost:3000/api/Department/' + this.id)
       .then(res => res.json())
-      .then(data => {this.depart = data; console.log(data);})
+      .then(data => {this.depart = data;})
       .catch(err => console.log(err.message))
     }
     
@@ -178,7 +178,7 @@ export default {
   mounted(){
     fetch('http://localhost:3000/api/Department/' + this.id)
     .then(res => res.json())
-    .then(data => {this.depart = data; console.log(data);})
+    .then(data => {this.depart = data;})
     .catch(err => console.log(err.message))
 
   }

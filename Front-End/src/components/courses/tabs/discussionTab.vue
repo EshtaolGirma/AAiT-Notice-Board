@@ -18,13 +18,15 @@
         <div class="reply" v-for="rep in ar.reply" :key="rep">
           <p class="username">@{{rep.name}}</p>
           <p>
+            
             &{{rep.comment}}
-          </p>
+          </p> 
         </div>
+        
         <hr />
         
         <hr />
-        <!-- question adding form -->
+        <!-- reply adding form -->
         <div class="post-reply">
           <form action="/" method="post">
             <label for="exampleFormControlTextarea1">
@@ -83,61 +85,32 @@
 <script>
 
   export default{
+    props:{
+      course: Object
+    },
     data(){
       return{
-        arr: [
-          {
-            id:'1',
-            name: 'abebe',
-            comment: "abebe beso bela",
-            reply: [
-              {
-                name: 'abebe',
-                comment: "abebe beso bela",
-              },
-              {
-                name: 'abebe',
-                comment: "abebe beso bela",
-              }
-            ] 
+        all:[],
+        arr: [] 
 
-          },
-          { 
-            id:'2',
-            name: 'abebe',
-            comment: "abebe beso bela",
-            reply: [
-              {
-                name: 'abebe',
-                comment: "abebe beso bela",
-              },
-              {
-                name: 'abebe',
-                comment: "abebe beso bela",
-              }
-            ] 
-
-          },
-          {
-            id:'3',
-            name: 'abebe',
-            comment: "abebe beso bela",
-            reply: [
-              {
-                name: 'abebe',
-                comment: "abebe beso bela",
-              },
-              {
-                name: 'abebe',
-                comment: "abebe beso bela",
-              }
-            ] 
-
+      }
+    },
+    mounted(){
+      fetch('http://localhost:3000/api/Discussion')
+      .then(res => res.json())
+      .then(data => {this.all = data; console.log(data); this.getdiscussion(data);} )
+      .catch(err => console.log(err.message))
+    },
+    methods:{
+      getdiscussion: function(data){
+        for (dis in data){
+          if(dis.courseID == this.course._id){
+            this.arr.push(dis);
           }
-
-        ]
+        }
       }
     }
+
   }
 
 

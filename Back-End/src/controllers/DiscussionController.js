@@ -1,13 +1,7 @@
 const mongoose = require("mongoose");
 const Discussion = require("../Models/DiscussionModel.js");
 
-// let question = new discussionModel({
-//     _id: new mongoose.Types.ObjectId(),
-//     userID: req.body.userID,
-//     courseID: req.body.courseID,
-//     level: 0,
-//     value: req.body.question,
-// });
+
 
 function postQuestion(req, res) {
   let question = new Discussion({
@@ -59,7 +53,7 @@ function replyToPost(req, res) {
 }
 
 function getPosts(req, res) {
-  Question.find()
+  Discussion.find().populate('courseID')
     .exec()
     .then((result) => {
       if (result) {

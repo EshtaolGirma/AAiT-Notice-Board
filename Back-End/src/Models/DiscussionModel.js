@@ -9,7 +9,6 @@ const DiscussionSchema = mongoose.Schema({
   },
   username: {
     type: String,
-    ref: "User",
     required: true,
   },
   message: {
