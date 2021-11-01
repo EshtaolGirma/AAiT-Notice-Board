@@ -72,14 +72,12 @@
           }
          if(this.message ==''){
                 this.error.push('message is required');
-
-          }
+         }
          e.preventDefault();
-         
        }
-       
      }
-  }
+ 
+};
 </script>
 <style scoped>
 a {
@@ -139,10 +137,8 @@ label {
   margin-bottom: 50px;
   padding-inline: 20px;
 }
-.title{
+.title {
   text-align: start;
 }
-.hide{
-  display: none;
-}
+
 </style>

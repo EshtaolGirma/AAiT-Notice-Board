@@ -10,11 +10,11 @@ const courseSchema = mongoose.Schema({
     type: Number,
     required: true,
   },
-  ECTS: {
+  semester: {
     type: Number,
     required: true,
   },
-  semester: {
+  ECTS: {
     type: Number,
     required: true,
   },
