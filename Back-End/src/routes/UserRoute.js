@@ -3,7 +3,7 @@ var router = express.Router();
 var UsersController = require("../controllers/UsersController");
 var auth = require("../middleware/auth");
 
-router.get("/student/", UsersController.getUser);
+router.get("/student", UsersController.getUser);
 router.get("/student/:stuId", UsersController.getUserById);
 router.post("/signUp", UsersController.signUp);
 router.post("/signIn", UsersController.signIn);
