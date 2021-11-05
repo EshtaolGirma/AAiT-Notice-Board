@@ -1,82 +1,94 @@
 <template>
   <div>
-  <h3 class="tab-title" style="margin-left: 50px; color: #121c41">
-    Post New News Feed
-  </h3>
-  <hr />
+    <h3 class="tab-title" style="margin-left: 50px; color: #121c41">
+      Post New News Feed
+    </h3>
+    <hr />
 
-  <div class="card form-container">
-    <div class="card-body">
-      <h5 class="card-title">News Feed</h5>
-    </div>
-    <form @submit.prevent="submit" method="post">
-      <div class="title field">
-          <p v-if="error.length" style="color: red;">
-          <b>error(s):</b>
-          <ul>
-          <li v-for="err in error" :key="err">{{ err }}</li>
-          </ul>
+    <div class="card form-container">
+      <div class="card-body">
+        <h5 class="card-title">News Feed</h5>
+      </div>
+      <form @submit.prevent="submit" method="post">
+        <div class="title field">
+          <label for="username"
+            >Title <span style="color: red; font-size: 24px">*</span></label
+          >
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Title"
+            v-model="title"
+          />
+        </div>
+        <div class="title message field">
+          <label for="email"
+            >Newsfeed body
+            <span style="color: red; font-size: 24px">*</span></label
+          >
+          <textarea
+            v-model="message"
+            class="form-control question-textarea"
+            rows="5"
+            placeholder="Message"
+          ></textarea>
+        </div>
+
+        <div class="title field">
+          <p style="color: red; font-size: 18px; text-align: left">
+            {{ error }}
           </p>
-      </div>
-      <div class="title field">
-        <label for="username">Title</label>
-        <input type="text" class="form-control" placeholder="Title" v-model="title"/>
-      </div>
-      <div class="title message field">
-        <label for="email">Message body</label>
-        <textarea v-model="message"
-          class="form-control question-textarea"
-          rows="5"
-          placeholder="Message"
-        ></textarea>
-      </div>
+        </div>
 
-      <button type="submit" value="Submit" class="btn btn-success btn-detail-submit">
-        Post
-      </button>
-    </form>
-  </div>
+        <button
+          type="submit"
+          value="Submit"
+          class="btn btn-success btn-detail-submit"
+        >
+          Post
+        </button>
+      </form>
+    </div>
   </div>
 </template>
 <script>
-  export default{
-    props:{
-        dept:Object
-        
-    },
-     data(){
-       return{
-         title:'',
-         message:'',
-         error:[]
-       }
-     },
-    
-     
-     methods:{
-    
-       submit(e){
-         if(this.title !=='' && this.message !==''){
-           fetch('http://localhost:3000/api/NewsFeed', {
-            method: 'POST',
-            headers:{"Content-Type": "application/json"},
-            body: JSON.stringify({title: this.title, description:this.message, deptId: this.dept._id, postDate: new Date()  })
+export default {
+  props: {
+    dept: Object,
+  },
+  data() {
+    return {
+      title: "",
+      message: "",
+      error: "",
+    };
+  },
 
-           }).then(res => res.json())
-           .then(data=> {console.log(data); window.location.reload();})
-           .catch(err => console.log(err.message))
-         }
-         this.error=[];
-         if(this.title == ''){
-                this.error.push('title is required');
-          }
-         if(this.message ==''){
-                this.error.push('message is required');
-         }
-         e.preventDefault();
-       }
-     }
- 
+  methods: {
+    submit(e) {
+      if (this.title !== "" && this.message !== "") {
+        fetch("http://localhost:3000/api/NewsFeed", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            title: this.title,
+            description: this.message,
+            deptId: this.dept._id,
+            postDate: new Date(),
+          }),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            window.location.reload();
+          })
+          .catch((err) => console.log(err.message));
+      } else {
+        this.error = "please fill out the required fields";
+      }
+      e.preventDefault();
+    },
+  },
 };
 </script>
 <style scoped>
@@ -140,5 +152,4 @@ label {
 .title {
   text-align: start;
 }
-
 </style>

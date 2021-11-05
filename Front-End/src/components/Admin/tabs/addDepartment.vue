@@ -8,10 +8,27 @@
     <div class="card-body">
       <h5 class="card-title">Department</h5>
     </div>
-    <form>
+    <form @submit.prevent="submit" method="post">
       <div class="title field">
-        <label>Name</label>
-        <input type="text" class="form-control" placeholder="Name" />
+        <label>Name <span style="color: red; font-size: 24px">*</span></label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Name"
+          v-model="name"
+        />
+      </div>
+
+      <div class="title field">
+        <label
+          >Description <span style="color: red; font-size: 24px">*</span></label
+        >
+        <textarea
+          type="text"
+          class="form-control"
+          placeholder="description"
+          v-model="description"
+        />
       </div>
 
       <hr />
@@ -22,26 +39,46 @@
       </div>
       <div class="col-6">
         <div class="title field">
-          <label>Dean's Name</label>
-          <input type="text" class="form-control" placeholder="Name" />
+          <label
+            >Dean's Name
+            <span style="color: red; font-size: 24px">*</span></label
+          >
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Name"
+            v-model="deanName"
+          />
         </div>
       </div>
 
       <div class="row">
         <div class="col">
           <div class="title field">
-            <label>Dean's Office</label>
+            <label
+              >Dean's Office
+              <span style="color: red; font-size: 24px">*</span></label
+            >
             <input
               type="text"
               class="form-control"
               placeholder="Office Address"
+              v-model="deanOffice"
             />
           </div>
         </div>
         <div class="col">
           <div class="title field">
-            <label>Dean's Office Hours</label>
-            <input type="text" class="form-control" placeholder="Hours" />
+            <label
+              >Dean's Office Hours
+              <span style="color: red; font-size: 24px">*</span></label
+            >
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Hours"
+              v-model="deanOfficeHour"
+            />
           </div>
         </div>
       </div>
@@ -54,36 +91,126 @@
       </div>
       <div class="col-6">
         <div class="title field">
-          <label>Advisory's Name</label>
-          <input type="text" class="form-control" placeholder="Name" />
+          <label
+            >Advisory's Name
+            <span style="color: red; font-size: 24px">*</span></label
+          >
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Name"
+            v-model="advisorName"
+          />
         </div>
       </div>
 
       <div class="row">
         <div class="col">
           <div class="title field">
-            <label>Advisory's Office</label>
+            <label
+              >Advisory's
+              <span style="color: red; font-size: 24px">*</span></label
+            >
             <input
               type="text"
               class="form-control"
               placeholder="Office Address"
+              v-model="advisorOffice"
             />
           </div>
         </div>
         <div class="col">
           <div class="title field">
-            <label>Advisory's Office Hours</label>
-            <input type="text" class="form-control" placeholder="Hours" />
+            <label
+              >Advisory's Office Hours
+              <span style="color: red; font-size: 24px">*</span></label
+            >
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Hours"
+              v-model="advisorOfficeHour"
+            />
           </div>
         </div>
       </div>
 
-      <button type="button" class="btn btn-success btn-detail-submit">
+      <div class="title field">
+        <p style="color: red; font-size: 18px; text-align: left">
+          {{ error }}
+        </p>
+      </div>
+
+      <button
+        type="submit"
+        value="Submit"
+        class="btn btn-success btn-detail-submit"
+      >
         Add
       </button>
     </form>
   </div>
 </template>
+
+<script>
+export default {
+  props: {
+    dept: Object,
+  },
+  data() {
+    return {
+      name: "",
+      description: "",
+      deanName: "",
+      deanOffice: "",
+      deanOfficeHour: "",
+      advisorName: "",
+      advisorOffice: "",
+      advisorOfficeHour: "",
+      error: "",
+    };
+  },
+  methods: {
+    submit(e) {
+      if (
+        this.name !== "" &&
+        this.description !== "" &&
+        this.deanName !== "" &&
+        this.deanOffice !== "" &&
+        this.deanOfficeHour !== "" &&
+        this.advisorName !== "" &&
+        this.advisorOffice !== "" &&
+        this.advisorOfficeHour !== ""
+      ) {
+        fetch("http://localhost:3000/api/Department", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name: this.name,
+            description: this.description,
+            deanName: this.deanName,
+            deanOffice: this.deanOffice,
+            deanOfficeHour: this.deanOfficeHour,
+            advisorName: this.advisorName,
+            advisorOffice: this.advisorOffice,
+            advisorOfficeHour: this.advisorOfficeHour,
+          }),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            window.location.reload();
+          })
+          .catch((err) => console.log(err.message));
+      } else {
+        this.error = "please fill out the required fields";
+      }
+
+      e.preventDefault();
+    },
+  },
+};
+</script>
 
 <style scoped>
 .card {
