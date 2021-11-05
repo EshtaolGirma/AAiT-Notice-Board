@@ -1,69 +1,79 @@
 const mongoose = require("mongoose");
-const Material = require("../Models/CourseMatModel");
+const Grid = require("gridfs-stream");
 
-// Course material get endpoint
+// Mongo URI
+const mongoURI =
+  "mongodb+srv://aait-notice-board:aait-notice-board@aait-notice-board.qq1go.mongodb.net/manjuDB?retryWrites=true&w=majority";
 
-function getMaterial(req, res) {
-  Material.findById({ courseID: req.body.courseId })
-    .exec()
-    .then((result) => {
-      if (result) {
-        res.status(200).json(result);
-      } else {
-        res.status(404).json({ message: "Page not found" });
-      }
-    })
-    .catch((err) => {
-      res.status(500).json({
-        message: "Faced an error while fetching",
-        error: err,
+// Create mongo connection
+
+const conn = mongoose.createConnection(mongoURI);
+
+// Init gfs
+let gfs;
+
+conn.once("open", () => {
+  // Init stream
+  gfs = Grid(conn.db, mongoose.mongo);
+  gfs.collection("FileCollection");
+});
+
+function getFilesByCourse(req, res) {
+  const courseID = req.params.courseID;
+  // courseID from the url
+  gfs.files.find({ "metadata.course": courseID }).toArray((err, file) => {
+    // Check if file
+    if (!file || file.length === 0) {
+      return res.status(404).json({
+        err: "No file exist",
       });
-    });
+    }
+
+    // Files exist
+    return res.json(file);
+  });
+}
+// Course Material open or download based on file type
+
+function openFile(req, res) {
+  gfs.files.findOne({ filename: req.params.filename }, (err, file) => {
+    // Check if file exists
+    if (!file || file.length === 0) {
+      return res.status(404).json({
+        err: "No file exists",
+      });
+    }
+    // if possible show file preview else download it
+    const readStream = gfs.createReadStream(file.filename);
+    readStream.pipe(res);
+  });
 }
 
 // Course material post endpoint
 
 function postMaterial(req, res) {
-  let material = new Material({
-    _id: mongoose.Types.ObjectId(),
-    courseID: req.body.course,
-    category: req.body.cat,
-    filename: req.body.file,
-  });
-  metadata
-    .save()
-    .then((result) => {
-      res.status(201).json({
-        message: "Successfully",
-        value: result,
-      });
-    })
-    .catch((err) => {
-      res.status(500).json({
-        error: "Internal Server Error",
-        value: err,
-      });
-    });
+  // console.log(req.file);
+  res.json({ file: req.file });
 }
 
 // Course material delete endpoint
 
 function deleteMaterial(req, res) {
-  const id = req.params.materialID;
-  Material.remove({ _id: id })
-    .exec()
-    .then((result) => {
-      res.status(200).json(result);
-    })
-    .catch((err) => {
-      res.status(500).json({
-        error: err,
-      });
-    });
+  gfs.remove(
+    { _id: req.params.id, root: "FileCollection" },
+    (err, gridStore) => {
+      if (err) {
+        return res.status(404).json({ err: err });
+      }
+
+      res.json("deleted");
+    }
+  );
 }
 
 module.exports = {
-  getMaterial,
+  getFilesByCourse,
+  openFile,
   postMaterial,
   deleteMaterial,
 };

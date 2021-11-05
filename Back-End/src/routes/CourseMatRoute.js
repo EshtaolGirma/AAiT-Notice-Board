@@ -3,17 +3,13 @@ var router = express.Router();
 const multer = require("multer");
 
 const Material = require("../controllers/CourseMController");
-const { FileUploader } = require("../controllers/courseMaterialController");
+const { storage } = require("../controllers/courseMaterialController");
 
-const upload = multer({ FileUploader });
+const upload = multer({ storage });
 
-router.get("/", Material.getMaterial);
-// router.post("/", FileUploader, Material.postMaterial);
-router.post("/", upload.single("Ma"), (req, res) => {
-  console.log(req.body);
-  res.status(201).json({
-    message: req.body.Maa,
-  });
-});
+router.get("/course/:courseID", Material.getFilesByCourse);
+router.get("/open/:filename", Material.openFile);
+router.post("/", upload.single("file"), Material.postMaterial);
+router.delete("/:id", Material.deleteMaterial);
 
 module.exports = router;

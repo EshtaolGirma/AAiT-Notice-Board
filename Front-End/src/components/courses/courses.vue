@@ -13,17 +13,17 @@
 
             <td style="padding-left: 175px">
               <p>
-                {{course.description}}
+                {{ course.description }}
               </p>
             </td>
           </tr>
           <tr>
             <th scope="row">ECTS</th>
-            <td style="padding-left: 175px">{{course.ECTS}}</td>
+            <td style="padding-left: 175px">{{ course.ECTS }}</td>
           </tr>
           <tr>
             <th scope="row">Credit Hour</th>
-            <td style="padding-left: 175px">{{course.creditHour}}</td>
+            <td style="padding-left: 175px">{{ course.creditHour }}</td>
           </tr>
         </tbody>
       </table>
@@ -42,23 +42,21 @@
           <tr>
             <th scope="row">Lecturer</th>
 
-            <td>Dr. Manjunath</td>
-            <td>Pharm 101</td>
+            <td>{{ course.LecturerName }}h</td>
+            <td>{{ course.LecturerOffice }}</td>
             <td>
-              <p>
-                Mon 9:00-12:00, <br />
-                Thu 14:00-17:00
+              <p v-for="hr in course.LecturerOfficeHour" :key="hr">
+                {{ hr }}
               </p>
             </td>
           </tr>
           <tr>
             <th scope="row">Lab Assistance</th>
-            <td>Dr. Manjunath</td>
-            <td>Pharm 101</td>
+            <td>{{ course.LabAssistanceName }}</td>
+            <td>{{ course.LabAssistanceOffice }}</td>
             <td>
-              <p>
-                Mon 9:00-12:00, <br />
-                Thu 14:00-17:00
+              <p v-for="hr in course.LabAssistanceOfficeHour" :key="hr">
+                {{ hr }}
               </p>
             </td>
           </tr>
@@ -112,7 +110,7 @@
         role="tabpanel"
         aria-labelledby="nav-discussion-tab"
       >
-        <Discussion class="discussion" :course="course"/>
+        <Discussion class="discussion" :course="course" />
       </div>
       <!-- end of course discussion tab -->
 
@@ -123,7 +121,7 @@
         role="tabpanel"
         aria-labelledby="nav-material-tab"
       >
-        <Material :course="course"/>
+        <Material :course="course" />
       </div>
       <!-- end of course material tab -->
 
@@ -134,7 +132,7 @@
         role="tabpanel"
         aria-labelledby="nav-add-course-material-tab"
       >
-        <AddMaterial :course="course"/>
+        <AddMaterial :course="course" />
       </div>
       <!-- end of add new course material tab -->
     </div>
@@ -148,25 +146,26 @@ import Material from "./tabs/materialTab.vue";
 import AddMaterial from "./tabs/adminView/addMaterialTab.vue";
 
 export default {
-  data(){
-    return{
-        course:{},
-        id: this.$route.query.id,
-        
-    }
-
+  data() {
+    return {
+      course: {},
+      id: this.$route.query.id,
+    };
   },
   components: {
     Discussion,
     Material,
     AddMaterial,
   },
-  mounted(){
-    fetch('http://localhost:3000/api/Course/' + this.id)
-    .then(res => res.json())
-    .then(data => {this.course = data; console.log(data);})
-    .catch(err => console.log(err.message))
-  }
+  mounted() {
+    fetch("http://localhost:3000/api/Course/" + this.id)
+      .then((res) => res.json())
+      .then((data) => {
+        this.course = data;
+        console.log(data);
+      })
+      .catch((err) => console.log(err.message));
+  },
 };
 </script>
 

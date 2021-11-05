@@ -1,8 +1,6 @@
 const mongoose = require("mongoose");
 const Discussion = require("../Models/DiscussionModel.js");
 
-
-
 function postQuestion(req, res) {
   let question = new Discussion({
     _id: new mongoose.Types.ObjectId(),
@@ -17,7 +15,7 @@ function postQuestion(req, res) {
         message: "Question posted",
         value: result,
       });
-      log("Question posted");
+      console.countReset("Question posted");
     })
     .catch((err) => {
       res.status(500).json({
@@ -42,7 +40,7 @@ function replyToPost(req, res) {
         message: "Reply posted",
         value: result,
       });
-      log("Reply posted");
+      console.log("Reply posted");
     })
     .catch((err) => {
       res.status(500).json({
@@ -53,12 +51,34 @@ function replyToPost(req, res) {
 }
 
 function getPosts(req, res) {
-  Discussion.find().populate('courseID')
+  Discussion.find()
+    .populate("courseID")
     .exec()
     .then((result) => {
       if (result) {
         res.status(200).json(result);
-        log("getting posts");
+      } else {
+        res.status(404).json({
+          message: "nothing found",
+        });
+      }
+    })
+    .catch((err) => {
+      res.status(500).json({
+        error: "Internal Server Error",
+        value: err,
+      });
+    });
+}
+
+function getPostsByID(req, res) {
+  const courseID = req.params.courseID;
+  Discussion.findById({ courseID: courseID })
+    // .populate("courseID")
+    .exec()
+    .then((result) => {
+      if (result) {
+        res.status(200).json(result);
       } else {
         res.status(404).json({
           message: "nothing found",
@@ -75,6 +95,7 @@ function getPosts(req, res) {
 
 module.exports = {
   getPosts,
+  getPostsByID,
   postQuestion,
   replyToPost,
 };

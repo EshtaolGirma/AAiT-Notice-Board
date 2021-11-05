@@ -331,7 +331,7 @@ function updateDeptAdmin(req, res) {
   }
 }
 function deleteDeptAdminByID(req, res) {
-  const id = req.params.DeptAdminID;
+  const id = req.params.deptAdminId;
   DeptAdmin.remove({ _id: id })
     .exec()
     .then((result) => {
