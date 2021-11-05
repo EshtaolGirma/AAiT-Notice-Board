@@ -13,7 +13,7 @@ const TOKEN_KEY = "thisisthesecretkey";
 
 function getUser(req, res) {
   Student.find()
-    //.populate("")
+    .populate("deptId")
     .exec()
     .then((result) => {
       if (result) {
@@ -29,7 +29,7 @@ function getUser(req, res) {
 function getUserById(req, res) {
   const stuId = req.params.stuId;
   Student.findById({ _id: stuId })
-    //.populate("")
+    .populate("deptId")
     .exec()
     .then((result) => {
       if (result) {
@@ -237,7 +237,7 @@ function deleteUserByID(req, res) {
 ///////////////////////////////////////////////////////////////////////////
 function getDeptAdmin(req, res) {
   DeptAdmin.find()
-    //.populate("")
+    .populate("deptId")
     .exec()
     .then((result) => {
       if (result) {
@@ -253,7 +253,7 @@ function getDeptAdmin(req, res) {
 function getDeptAdminById(req, res) {
   const deptAdminId = req.params.DeptAdminId;
   DeptAdmin.findById({ _id: DeptAdminId })
-    //.populate("")
+    .populate("deptId")
     .exec()
     .then((result) => {
       if (result) {
@@ -278,6 +278,7 @@ async function postDeptAdmin(req, res) {
     username: username,
     email: email,
     password: encryptedPassword,
+    repeat_pass: encryptedPassword,
     deptId: deptId,
   })
     .save()
@@ -343,6 +344,8 @@ function deleteDeptAdminByID(req, res) {
       });
     });
 }
+
+
 /////////////////////////////////////////////////
 async function postAdmin(req, res) {
   const { username, email, password } = req.body;
