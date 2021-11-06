@@ -3,7 +3,7 @@ var router = express.Router();
 const multer = require("multer");
 
 const Material = require("../controllers/CourseMController");
-const { storage } = require("../controllers/courseMaterialController");
+const { storage } = require("../middleware/courseMaterial");
 
 const upload = multer({ storage });
 
